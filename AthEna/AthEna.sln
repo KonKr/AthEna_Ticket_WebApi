@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2015
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AthEna_WebApi", "AthEna_WebApi\AthEna_WebApi.csproj", "{8B5BABD5-6CEA-4C7D-8F80-7647DCD4DE2B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8B5BABD5-6CEA-4C7D-8F80-7647DCD4DE2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B5BABD5-6CEA-4C7D-8F80-7647DCD4DE2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B5BABD5-6CEA-4C7D-8F80-7647DCD4DE2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B5BABD5-6CEA-4C7D-8F80-7647DCD4DE2B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FFB54A71-E9A7-496B-89EC-E4B28367AE31}
+	EndGlobalSection
+EndGlobal
