@@ -24,6 +24,7 @@ namespace AthEna_WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            //Configuration.GetConnectionString("AthEnaDB");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
