@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace AthEna_WebApi.Models
 {
-    public partial class Contacts
+    public partial class Contact
     {
-        public Contacts()
+        public Contact()
         {
-            Cards = new HashSet<Cards>();
+            Cards = new HashSet<Card>();
         }
 
         public int Id { get; set; }
@@ -17,6 +17,6 @@ namespace AthEna_WebApi.Models
         public string IdCardNum { get; set; }
         public int SocialSecurityNum { get; set; }
 
-        public ICollection<Cards> Cards { get; set; }
+        public ICollection<Card> Cards { get; set; }
     }
 }

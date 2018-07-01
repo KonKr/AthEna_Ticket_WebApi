@@ -3,16 +3,18 @@ using System.Collections.Generic;
 
 namespace AthEna_WebApi.Models
 {
-    public partial class Vehicles
+    public partial class MetroStation
     {
-        public Vehicles()
+        public MetroStation()
         {
             ValidationActivity = new HashSet<ValidationActivity>();
         }
 
         public int Id { get; set; }
-        public Guid VehicleId { get; set; }
-        public string LicensePlate { get; set; }
+        public Guid StationId { get; set; }
+        public string StationName { get; set; }
+        public int IsOnLine { get; set; }
+        public int? IsAlsoOnLine { get; set; }
 
         public ICollection<ValidationActivity> ValidationActivity { get; set; }
     }

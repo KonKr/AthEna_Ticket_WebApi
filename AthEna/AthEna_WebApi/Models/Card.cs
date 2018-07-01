@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace AthEna_WebApi.Models
 {
-    public partial class Cards
+    public partial class Card
     {
-        public Cards()
+        public Card()
         {
             ValidationActivity = new HashSet<ValidationActivity>();
         }
@@ -17,7 +17,7 @@ namespace AthEna_WebApi.Models
         public DateTime LastRechargedOn { get; set; }
         public DateTime ChargeExpiresOn { get; set; }
 
-        public Contacts Contact { get; set; }
+        public Contact Contact { get; set; }
         public ICollection<ValidationActivity> ValidationActivity { get; set; }
     }
 }

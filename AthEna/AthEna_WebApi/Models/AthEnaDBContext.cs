@@ -6,12 +6,12 @@ namespace AthEna_WebApi.Models
 {
     public partial class AthEnaDBContext : DbContext
     {
-        public virtual DbSet<Cards> Cards { get; set; }
-        public virtual DbSet<Contacts> Contacts { get; set; }
-        public virtual DbSet<MetroStations> MetroStations { get; set; }
-        public virtual DbSet<Routes> Routes { get; set; }
+        public virtual DbSet<Card> Cards { get; set; }
+        public virtual DbSet<Contact> Contacts { get; set; }
+        public virtual DbSet<MetroStation> MetroStations { get; set; }
+        public virtual DbSet<Route> Routes { get; set; }
         public virtual DbSet<ValidationActivity> ValidationActivity { get; set; }
-        public virtual DbSet<Vehicles> Vehicles { get; set; }
+        public virtual DbSet<Vehicle> Vehicles { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -23,7 +23,7 @@ namespace AthEna_WebApi.Models
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Cards>(entity =>
+            modelBuilder.Entity<Card>(entity =>
             {
                 entity.HasKey(e => e.CardId);
 
@@ -44,7 +44,7 @@ namespace AthEna_WebApi.Models
                     .HasConstraintName("FK_Cards_Contacts");
             });
 
-            modelBuilder.Entity<Contacts>(entity =>
+            modelBuilder.Entity<Contact>(entity =>
             {
                 entity.HasKey(e => e.ContactId);
 
@@ -65,7 +65,7 @@ namespace AthEna_WebApi.Models
                     .HasMaxLength(100);
             });
 
-            modelBuilder.Entity<MetroStations>(entity =>
+            modelBuilder.Entity<MetroStation>(entity =>
             {
                 entity.HasKey(e => e.StationId);
 
@@ -82,7 +82,7 @@ namespace AthEna_WebApi.Models
                     .HasMaxLength(100);
             });
 
-            modelBuilder.Entity<Routes>(entity =>
+            modelBuilder.Entity<Route>(entity =>
             {
                 entity.HasKey(e => e.RouteId);
 
@@ -137,7 +137,7 @@ namespace AthEna_WebApi.Models
                     .HasConstraintName("FK_ValidationActivity_MetroStations");
             });
 
-            modelBuilder.Entity<Vehicles>(entity =>
+            modelBuilder.Entity<Vehicle>(entity =>
             {
                 entity.HasKey(e => e.VehicleId);
 

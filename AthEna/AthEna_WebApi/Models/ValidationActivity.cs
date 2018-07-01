@@ -14,9 +14,9 @@ namespace AthEna_WebApi.Models
         public Guid? RouteId { get; set; }
         public Guid CardId { get; set; }
 
-        public Vehicles Bus { get; set; }
-        public Cards Card { get; set; }
-        public Routes Route { get; set; }
-        public MetroStations Station { get; set; }
+        public Vehicle Bus { get; set; }
+        public Card Card { get; set; }
+        public Route Route { get; set; }
+        public MetroStation Station { get; set; }
     }
 }
