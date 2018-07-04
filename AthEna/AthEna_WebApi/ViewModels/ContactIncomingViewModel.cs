@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace AthEna_WebApi.ViewModels
 {
-    public class ContactViewModel
+    public class ContactIncomingViewModel
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string IdCardNum { get; set; }
+        public String FirstName { get; set; }
+        public String LastName { get; set; }
+        public String IdCardNum { get; set; }
         public int SocialSecurityNum { get; set; }
     }
 }
