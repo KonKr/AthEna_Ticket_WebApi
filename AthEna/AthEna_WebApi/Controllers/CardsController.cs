@@ -38,6 +38,21 @@ namespace AthEna_WebApi.Controllers
             }
         }
 
+        [Route("api/ContactsWithCards")]
+        [HttpGet]
+        public IActionResult GetContactsWithCards()
+        {
+            try
+            {
+                var res = CardsRepo.GetContactsWithCards();
+                return Ok(res);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, _config["StatusCodesText:ServerErr"]);
+            }
+        }
+
 
     }
 }

@@ -13,12 +13,12 @@ namespace AthEna_WebApi.Repositories
             try
             {
                 var cardsList = db.Cards.Select(s=> new CardOutgoingViewModel {
-                                                CardId = s.CardId,
-                                                ChargeExpiresOn = s.ChargeExpiresOn,
-                                                ContactId = s.ContactId,
-                                                lastRecharedOn = s.LastRechargedOn,
-                                                RegisteredOn = s.RegisteredOn,                
-                                            }).ToList();
+                    CardId = s.CardId,
+                    ChargeExpiresOn = s.ChargeExpiresOn,
+                    ContactId = s.ContactId,
+                    lastRecharedOn = s.LastRechargedOn,
+                    RegisteredOn = s.RegisteredOn,                
+                }).ToList();
                 return cardsList;
             }
             catch (Exception e)
@@ -45,6 +45,15 @@ namespace AthEna_WebApi.Repositories
             {
                 throw e;
             }
+        }
+
+        public dynamic GetContactsWithCards()
+        {
+            var cons = db.Contacts.ToList();
+            var cards = db.Cards.ToList();
+
+            var joinedList = cons.Join(cards, a => a.ContactId, b => b.ContactId, (a, b) => new { a.ContactId, a.FirstName, a.LastName, b.CardId, b.ChargeExpiresOn }).ToList();
+            return joinedList;
         }
     }
 }

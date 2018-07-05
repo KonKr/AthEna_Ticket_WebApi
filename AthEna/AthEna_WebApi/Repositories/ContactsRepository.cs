@@ -14,12 +14,12 @@ namespace AthEna_WebApi.Repositories
             try
             {
                 var contactsList = db.Contacts.Select(s => new ContactOutgoingViewModel {
-                                                            ContactId = s.ContactId,
-                                                            FirstName = s.FirstName,
-                                                            IdCardNum = s.IdCardNum,
-                                                            LastName = s.LastName,
-                                                            SocialSecurityNum = s.SocialSecurityNum
-                                                        }).ToList();
+                    ContactId = s.ContactId,
+                    FirstName = s.FirstName,
+                    IdCardNum = s.IdCardNum,
+                    LastName = s.LastName,
+                    SocialSecurityNum = s.SocialSecurityNum
+                }).ToList();
                 return contactsList;
             }
             catch (Exception e)
@@ -33,13 +33,13 @@ namespace AthEna_WebApi.Repositories
             try
             {
                 var contact = db.Contacts.Where(w => w.ContactId == contactGuid).Select(s => new ContactOutgoingViewModel
-                                                                                                {
-                                                                                                    ContactId = s.ContactId,
-                                                                                                    FirstName = s.FirstName,
-                                                                                                    IdCardNum = s.IdCardNum,
-                                                                                                    LastName = s.LastName,
-                                                                                                    SocialSecurityNum = s.SocialSecurityNum
-                                                                                                }).FirstOrDefault();
+                {
+                    ContactId = s.ContactId,
+                    FirstName = s.FirstName,
+                    IdCardNum = s.IdCardNum,
+                    LastName = s.LastName,
+                    SocialSecurityNum = s.SocialSecurityNum
+                }).FirstOrDefault();
                 return contact;
             }
             catch (Exception e)
