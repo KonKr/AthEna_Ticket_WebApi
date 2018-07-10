@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AthEna_WebApi.ViewModels
 {
-    public class ContactOutgoingViewModel
+    public class ContactViewModel
     {
         public Guid ContactId { get; set; }
         public string FirstName { get; set; }

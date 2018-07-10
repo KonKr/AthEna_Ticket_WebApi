@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AthEna_WebApi.Models;
 using AthEna_WebApi.Repositories;
 using AthEna_WebApi.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -22,15 +23,16 @@ namespace AthEna_WebApi.Controllers
             _config = Configuration;
         }
 
-        [Route("api/Card/{cardId?}")]
+
+        [Route("api/Card/{cardId?}")]//get a card or all cards
         [HttpGet]
         public IActionResult GetCards(Guid cardId)
         {
             try
             {
-                if(cardId == Guid.Empty)
-                    return Ok(CardsRepo.GetAllCards());
-                return Ok(CardsRepo.GetCard(cardId));
+                if(cardId == Guid.Empty)// if cardId is not set...
+                    return Ok(CardsRepo.GetAllCards()); //retrieve all cards...
+                return Ok(CardsRepo.GetCard(cardId)); //else get specified card
             }
             catch (Exception e)
             {
@@ -38,20 +40,38 @@ namespace AthEna_WebApi.Controllers
             }
         }
 
-        [Route("api/ContactsWithCards")]
-        [HttpGet]
-        public IActionResult GetContactsWithCards()
+
+        [Route("api/Card")] //create a card...
+        [HttpPost]
+        public IActionResult CreateNewCard([FromBody] Card CardIncoming)
         {
             try
             {
-                var res = CardsRepo.GetContactsWithCards();
-                return Ok(res);
+                var newCardCreation = CardsRepo.CreateNewCard(CardIncoming); //create a new card entry based on the given model...
+                return Ok();
             }
             catch (Exception e)
             {
                 return StatusCode(500, _config["StatusCodesText:ServerErr"]);
             }
         }
+
+
+        //[Route("api/ContactWithCard/{}/{?}")]
+        //[HttpGet]
+        //public IActionResult GetContactsWithCards()
+        //{
+        //    try
+        //    {
+        //        var res = CardsRepo.GetContactsWithCards();
+        //        return Ok(res);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return StatusCode(500, _config["StatusCodesText:ServerErr"]);
+        //    }
+        //}
+
 
 
     }

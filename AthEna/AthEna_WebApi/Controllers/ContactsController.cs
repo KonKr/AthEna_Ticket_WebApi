@@ -24,7 +24,7 @@ namespace AthEna_WebApi.Controllers
         }
 
 
-        [Route("api/Contact/{contactGuid?}")]
+        [Route("api/Contact/{contactGuid?}")] //get info about a specific contact or all...
         [HttpGet]
         public IActionResult GetContacts(Guid contactGuid)
         {
@@ -41,23 +41,32 @@ namespace AthEna_WebApi.Controllers
             
         }
 
-        //TODO: add to repository.
-        [Route("api/CreateNewContact")]
+
+        [Route("api/Contact")] //Create a new Contact...
         [HttpPost]
-        public IActionResult CreateNewContact([FromBody]ContactIncomingViewModel newContact)
+        public IActionResult CreateNewContact([FromBody]Contact newContact)
         {
             try
             {
-                var newContactsGuid = ContactsRepo.CreateNewContact(newContact); //on creation, we get the new contact's guid...
-                if (newContactsGuid != false)
-                    return Ok(newContactsGuid);
-                return BadRequest(_config["StatusCodesText:WrongInput"]);
+                if (ModelState.IsValid)//checking model state
+                {
+                    var contactCreationResult = ContactsRepo.CreateNewContact(newContact);
+                    if (contactCreationResult.GetType() == typeof(Guid) )
+                        return Ok((Guid) contactCreationResult); //if the creation is successful return the id of the new contact...
+                    return BadRequest(); //if not... return bad request...
+                }
+                return BadRequest(ModelState); //if model state is not valid
             }
             catch (Exception e)
             {
                 return StatusCode(500, _config["StatusCodesText:ServerErr"]);
-            }
+            }      
         }    
+
+        //[Route("api/SearchContact/{searchTerm}/{searchValue}")]
+        //[HttpGet]
+        //public IActionResult 
+
 
     }
 }

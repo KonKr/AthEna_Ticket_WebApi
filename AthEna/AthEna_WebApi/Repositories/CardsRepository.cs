@@ -1,4 +1,5 @@
-﻿using AthEna_WebApi.ViewModels;
+﻿using AthEna_WebApi.Models;
+using AthEna_WebApi.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,13 +48,39 @@ namespace AthEna_WebApi.Repositories
             }
         }
 
+        public Card CreateNewCard(Card newCardToAdd)
+        {
+            try
+            {
+                var asdf = new Card()
+                {
+                    CardId = Guid.NewGuid()
+                };
+                return asdf;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public dynamic GetContactsWithCards()
         {
-            var cons = db.Contacts.ToList();
-            var cards = db.Cards.ToList();
+            try
+            {
+                var cons = db.Contacts.ToList();
+                var cards = db.Cards.ToList();
 
-            var joinedList = cons.Join(cards, a => a.ContactId, b => b.ContactId, (a, b) => new { a.ContactId, a.FirstName, a.LastName, b.CardId, b.ChargeExpiresOn }).ToList();
-            return joinedList;
+                var joinedList = cons.Join(cards, a => a.ContactId, b => b.ContactId, (a, b) => new { a.ContactId, a.FirstName, a.LastName, b.CardId, b.ChargeExpiresOn }).ToList();
+                return joinedList;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }            
         }
+
+
+
     }
 }

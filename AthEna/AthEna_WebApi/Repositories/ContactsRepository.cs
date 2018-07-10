@@ -9,17 +9,11 @@ namespace AthEna_WebApi.Repositories
     public class ContactsRepository : InitialRepository
     {
        
-        public List<ContactOutgoingViewModel> GetAllContacts()
+        public List<Contact> GetAllContacts()
         {
             try
             {
-                var contactsList = db.Contacts.Select(s => new ContactOutgoingViewModel {
-                    ContactId = s.ContactId,
-                    FirstName = s.FirstName,
-                    IdCardNum = s.IdCardNum,
-                    LastName = s.LastName,
-                    SocialSecurityNum = s.SocialSecurityNum
-                }).ToList();
+                var contactsList = db.Contacts.ToList();
                 return contactsList;
             }
             catch (Exception e)
@@ -28,18 +22,11 @@ namespace AthEna_WebApi.Repositories
             }
         }
 
-        public ContactOutgoingViewModel GetContact(Guid contactGuid)
+        public Contact GetContact(Guid contactGuid)
         {
             try
             {
-                var contact = db.Contacts.Where(w => w.ContactId == contactGuid).Select(s => new ContactOutgoingViewModel
-                {
-                    ContactId = s.ContactId,
-                    FirstName = s.FirstName,
-                    IdCardNum = s.IdCardNum,
-                    LastName = s.LastName,
-                    SocialSecurityNum = s.SocialSecurityNum
-                }).FirstOrDefault();
+                var contact = db.Contacts.Where(w => w.ContactId == contactGuid).FirstOrDefault();
                 return contact;
             }
             catch (Exception e)
@@ -48,11 +35,11 @@ namespace AthEna_WebApi.Repositories
             }
         }
 
-        public dynamic CreateNewContact(ContactIncomingViewModel newContact)
+        public dynamic CreateNewContact(Contact newContact)
         {
             try
-            {
-                var contactToAdd = new Contact()
+            {   
+                var contactToAdd = new Contact()//attempt to create a new object
                 {
                     ContactId = Guid.NewGuid(),
                     FirstName = newContact.FirstName,
@@ -62,15 +49,18 @@ namespace AthEna_WebApi.Repositories
                 };
 
                 db.Add(contactToAdd);
-                db.SaveChanges();
+                var savingResult = db.SaveChanges();
 
-                return contactToAdd.ContactId;                
+                if(savingResult!=0)//check if an error has occured
+                    return contactToAdd.ContactId;
+                return false;
             }
             catch (Exception e)
             {
                 return false;
             }
         }
+       
 
         
 
