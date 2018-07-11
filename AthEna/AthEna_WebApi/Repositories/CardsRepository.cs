@@ -48,15 +48,25 @@ namespace AthEna_WebApi.Repositories
             }
         }
 
-        public Card CreateNewCard(Card newCardToAdd)
+        public dynamic CreateNewCard(Card newCard)
         {
             try
             {
-                var asdf = new Card()
+                var cardToAdd = new Card()//attempt to create a new object...
                 {
-                    CardId = Guid.NewGuid()
+                    CardId = Guid.NewGuid(),
+                    ContactId = newCard.ContactId,
+                    RegisteredOn = DateTime.Now,
+                    LastRechargedOn = DateTime.Now,
+                    ChargeExpiresOn = DateTime.Now,
                 };
-                return asdf;
+
+                db.Add(cardToAdd);
+                var savingResult = db.SaveChanges();
+
+                if (savingResult != 0)//check if an error has occured
+                    return cardToAdd.ContactId;
+                return false;
             }
             catch (Exception e)
             {

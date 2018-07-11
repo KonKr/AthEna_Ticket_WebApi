@@ -43,12 +43,18 @@ namespace AthEna_WebApi.Controllers
 
         [Route("api/Card")] //create a card...
         [HttpPost]
-        public IActionResult CreateNewCard([FromBody] Card CardIncoming)
+        public IActionResult CreateNewCard([FromBody] Card newCard)
         {
             try
             {
-                var newCardCreation = CardsRepo.CreateNewCard(CardIncoming); //create a new card entry based on the given model...
-                return Ok();
+                if (ModelState.IsValid)
+                {
+                    var cardCreationResult = CardsRepo.CreateNewCard(newCard);
+                    if (cardCreationResult.GetType() == typeof(Guid))
+                        return Ok((Guid)cardCreationResult); //if the creation is successful return the id of the new card...
+                    return BadRequest(); //if not... return bad request...
+                }
+                return BadRequest(ModelState); //if wrong input...
             }
             catch (Exception e)
             {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace AthEna_WebApi.Models
 {
@@ -12,6 +13,7 @@ namespace AthEna_WebApi.Models
 
         public int Id { get; set; }
         public Guid CardId { get; set; }
+        [Required]
         public Guid ContactId { get; set; }
         public DateTime RegisteredOn { get; set; }
         public DateTime LastRechargedOn { get; set; }
