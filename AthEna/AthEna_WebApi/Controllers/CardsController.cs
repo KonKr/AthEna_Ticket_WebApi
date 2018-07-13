@@ -61,23 +61,7 @@ namespace AthEna_WebApi.Controllers
                 return StatusCode(500, _config["StatusCodesText:ServerErr"]);
             }
         }
-
-
-        //[Route("api/ContactWithCard/{}/{?}")]
-        //[HttpGet]
-        //public IActionResult GetContactsWithCards()
-        //{
-        //    try
-        //    {
-        //        var res = CardsRepo.GetContactsWithCards();
-        //        return Ok(res);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return StatusCode(500, _config["StatusCodesText:ServerErr"]);
-        //    }
-        //}
-
+        
 
 
     }

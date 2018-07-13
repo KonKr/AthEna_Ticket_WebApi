@@ -35,24 +35,36 @@ namespace AthEna_WebApi.Repositories
             }
         }
 
-        public dynamic CreateNewContact(Contact newContact)
+        public dynamic CreateNewContact_WithCard(ContactWithCard_ViewModel newContactWithCard)
         {
             try
-            {   
-                var contactToAdd = new Contact()//attempt to create a new object
+            {
+                //attempt to create the contact first...
+                var contactToAdd = new Contact()//attempt to create a new object...
                 {
                     ContactId = Guid.NewGuid(),
-                    FirstName = newContact.FirstName,
-                    IdCardNum = newContact.IdCardNum,
-                    LastName = newContact.LastName,
-                    SocialSecurityNum = newContact.SocialSecurityNum
+                    FirstName = newContactWithCard.FirstName,
+                    IdCardNum = newContactWithCard.IdCardNum,
+                    LastName = newContactWithCard.LastName,
+                    SocialSecurityNum = newContactWithCard.SocialSecurityNum                    
                 };
-
                 db.Add(contactToAdd);
-                var savingResult = db.SaveChanges();
 
-                if(savingResult!=0)//check if an error has occured
-                    return contactToAdd.ContactId;
+                //attempt to create the associated card...
+                var cardToAdd = new Card()//attempt to create a new object based on the creation of the contact first...
+                {
+                    CardId = new Guid(),
+                    ContactId = contactToAdd.ContactId,
+                    RegisteredOn = DateTime.Now,
+                    LastRechargedOn = DateTime.Now,
+                    ChargeExpiresOn = DateTime.Now,
+                };
+                db.Add(contactToAdd);
+
+
+                var savingResult = db.SaveChanges();
+                if(savingResult!=0)//check if an error has occured...
+                    return new KeyValuePair<Guid, Guid>(contactToAdd.ContactId, cardToAdd.CardId);
                 return false;
             }
             catch (Exception e)

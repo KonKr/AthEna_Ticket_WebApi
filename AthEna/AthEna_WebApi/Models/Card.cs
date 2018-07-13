@@ -13,6 +13,7 @@ namespace AthEna_WebApi.Models
 
         public int Id { get; set; }
         public Guid CardId { get; set; }
+
         [Required]
         public Guid ContactId { get; set; }
         public DateTime RegisteredOn { get; set; }
