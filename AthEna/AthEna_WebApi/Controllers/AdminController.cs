@@ -19,14 +19,18 @@ namespace AthEna_WebApi.Controllers
         private IConfiguration _config;
         private VehiclesRepository VehiclesRepo;
         private MetroStationRepository MetroStationRepo;
+        private RouteRepository RouteRepo;
+
         public AdminController(IConfiguration Configuration)
         {            
             VehiclesRepo = new VehiclesRepository();
             MetroStationRepo = new MetroStationRepository();
-
+            RouteRepo = new RouteRepository();
 
             _config = Configuration;
         }
+
+
 
         [BasicAuthentication]
         [Route("api/Vehicles/{vehicleId?}")]
@@ -98,6 +102,48 @@ namespace AthEna_WebApi.Controllers
                     var addNewMetroStationResult = MetroStationRepo.CreateMetroStation(newMetroStation);
                     if (addNewMetroStationResult.GetType() == typeof(Guid))
                         return Ok(addNewMetroStationResult); //if the creation is successful return the id of the new metro station...
+                    return BadRequest(); //if not... return bad request...
+                }
+                return BadRequest(ModelState);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, _config["StatusCodesText:ServerErr"]);
+            }
+        }
+
+
+
+
+        [BasicAuthentication]
+        [Route("api/Routes/{routeId?}")]
+        [HttpGet]
+        public IActionResult GetRoute(Guid routeId)
+        {
+            try
+            {
+                // var routes may return as a list or just an object...
+                var routes = RouteRepo.GetRoute(routeId);
+                return Ok(routes);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, _config["StatusCodesText:ServerErr"]);
+            }
+        }
+
+        [BasicAuthentication]
+        [Route("api/Routes")]
+        [HttpPost]
+        public IActionResult CreateRoute([FromBody] Route newRoute)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var addNewRoute = RouteRepo.CreateRoute(newRoute);
+                    if (addNewRoute.GetType() == typeof(Guid))
+                        return Ok(addNewRoute); //if the creation is successful return the id of the new metro station...
                     return BadRequest(); //if not... return bad request...
                 }
                 return BadRequest(ModelState);
