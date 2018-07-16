@@ -59,12 +59,12 @@ namespace AthEna_WebApi.Repositories
                     LastRechargedOn = DateTime.Now,
                     ChargeExpiresOn = DateTime.Now,
                 };
-                db.Add(contactToAdd);
+                db.Add(cardToAdd);
 
 
                 var savingResult = db.SaveChanges();
                 if(savingResult!=0)//check if an error has occured...
-                    return new KeyValuePair<Guid, Guid>(contactToAdd.ContactId, cardToAdd.CardId);
+                    return new ContactWithCard_Created_ViewModel() { NewContactId = contactToAdd.ContactId, NewCardId = cardToAdd.CardId };
                 return false;
             }
             catch (Exception e)
@@ -73,8 +73,6 @@ namespace AthEna_WebApi.Repositories
             }
         }
        
-
-        
 
     }
 }

@@ -11,7 +11,7 @@ namespace AthEna_WebApi.Models
             ValidationActivity = new HashSet<ValidationActivity>();
         }
 
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public Guid CardId { get; set; }
 
         [Required]

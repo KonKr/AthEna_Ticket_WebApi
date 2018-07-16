@@ -51,8 +51,8 @@ namespace AthEna_WebApi.Controllers
                 if (ModelState.IsValid)//checking model state
                 {
                     var contactWithCard_CreationResult = ContactsRepo.CreateNewContact_WithCard(newContactWithCard);
-                    if (contactWithCard_CreationResult.GetType() == typeof(KeyValuePair) )
-                        return Ok(contactWithCard_CreationResult); //if the creation is successful return the id of the new contact...
+                    if (contactWithCard_CreationResult.GetType() == typeof(ContactWithCard_Created_ViewModel) )
+                        return Ok(contactWithCard_CreationResult); //if the creation is successful return the id of the new contact as well as the id of the new card...
                     return BadRequest(); //if not... return bad request...
                 }
                 return BadRequest(ModelState); //if model state is not valid

@@ -32,6 +32,7 @@ namespace AthEna_WebApi.Models
                 entity.Property(e => e.ChargeExpiresOn).HasColumnType("datetime");
 
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
+                entity.Property(e => e.Id).Metadata.AfterSaveBehavior = PropertySaveBehavior.Ignore;
 
                 entity.Property(e => e.LastRechargedOn).HasColumnType("datetime");
 
