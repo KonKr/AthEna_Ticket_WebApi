@@ -84,15 +84,21 @@ namespace AthEna_WebApi.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var validationResult = CardsRepo.ValidateOnMetro(validationInfo);
+                    if (!validationInfo.ValidationOnEmbarkation.Value)//if intent is to disembark...
+                    {
+                        //check if user has embarked within 5 hours ago...
+                        if(!CardsRepo.HasEmbarkedBefore_Metro(validationInfo.ValidatingCardId))
+                            return BadRequest(_config["TicketValidationResult:FailedValidation_dueTo_InternalServerError"]);
+                    }                    
 
-                    //if the returned value is datetime, then it represents the expiration date of the ATH.ENA card...
-                    if (validationResult.GetType() == typeof(DateTime))
-                        return Ok(_config["TicketValidationResult:SuccessfulValidation"] + validationResult);
-
-                    //if the returned value is bool, and more specific "false" then the ticket has expired.
-                    if (validationResult.GetType() == typeof(bool))
+                    //check the validity of the card...
+                    var cardValidity = CardsRepo.CheckCardsValidity(validationInfo.ValidatingCardId);
+                    if (!cardValidity.Validity)
                         return BadRequest(_config["TicketValidationResult:FailedValidation_dueTo_ExpiredSubscription"]);
+
+                    //if card is valid, create entry in validation activity...
+                    if (CardsRepo.ValidateCard_OnMetro(validationInfo))//if validation is successful... display success message with card's expiration date...
+                        return Ok(_config["TicketValidationResult:SuccessfulValidation"] + cardValidity.ExpirationDate);
 
                     //if none of the above, return a general error
                     return BadRequest(_config["TicketValidationResult:FailedValidation_dueTo_InternalServerError"]);

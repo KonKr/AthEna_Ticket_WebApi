@@ -15,6 +15,6 @@ namespace AthEna_WebApi.ViewModels
         public Guid? ValidatingAtStationId { get; set; }
 
         [Required]
-        public bool ValidationOnEmbarkation { get; set; }
+        public bool? ValidationOnEmbarkation { get; set; }
     }
 }

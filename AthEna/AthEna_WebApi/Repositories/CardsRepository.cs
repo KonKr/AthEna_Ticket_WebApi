@@ -75,36 +75,26 @@ namespace AthEna_WebApi.Repositories
             }
         }
 
-        public dynamic ValidateOnMetro(ValidateCard_Metro_ViewModel validationInfo)
+        public dynamic ValidateCard_OnMetro(ValidateCard_Metro_ViewModel validationInfo)
         {
             try
             {
-                //in case of disembarkation.. check if an embarkation validation has taken place before...
-                if (validationInfo.ValidationOnEmbarkation == false)
-                {
-                    var validationActivity_LastRecord_For_SpecificCard = db.ValidationActivity.Take(100).Where(w => w.CardId == validationInfo.ValidatingCardId).OrderByDescending(o => o.ValidatedOn).FirstOrDefault();
-                    if (!GetBoolForEmbarkation_Disembarkation(validationActivity_LastRecord_For_SpecificCard.ValidatedAt))
-                        return 1; //return 1 in order to finaly return the generic error message...
-                }
-
-                //verify the card is still valid...
-                var cardExpirationDate = db.Cards.Where(w => w.CardId == validationInfo.ValidatingCardId).Select(s => s.ChargeExpiresOn).FirstOrDefault();
-                if (cardExpirationDate < DateTime.Now)
-                    return false; //if the ticket has expired return appropriate error message...
-
                 //create new validation entry...
                 var validationEntryToAdd = new ValidationActivity()
                 {
-                    StationId = validationInfo.ValidatingAtStationId,
                     CardId = validationInfo.ValidatingCardId.Value,
+                    StationId = validationInfo.ValidatingAtStationId,
                     ValidatedOn = DateTime.Now,
-                    ValidatedAt = GetEnumForEmbarkation_Disembarkation(validationInfo.ValidationOnEmbarkation)
+                    ValidatedAt = GetEnumForEmbarkation_Disembarkation(validationInfo.ValidationOnEmbarkation.Value)                    
                 };
 
+                //add new entry...
                 db.Add(validationEntryToAdd);
                 var savingResult = db.SaveChanges();
-                if (savingResult != 0) //check if an error has occured...
-                    return cardExpirationDate;
+
+                //return result...
+                if (savingResult != 0)
+                    return true;
                 return false;
             }
             catch (Exception e)
@@ -175,6 +165,19 @@ namespace AthEna_WebApi.Repositories
                     Validity = cardExpirationDate >= DateTime.Now ? true : false,
                     ExpirationDate = cardExpirationDate
                 };
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public bool HasEmbarkedBefore_Metro(Guid? validatingCardId)
+        {
+            try
+            {
+                var hasEmbarkedResult = db.ValidationActivity.Where(w => w.ValidatedAt.Value == 1 && w.ValidatedOn.AddHours(5) >= DateTime.Now).Any();
+                return hasEmbarkedResult;
             }
             catch (Exception e)
             {
