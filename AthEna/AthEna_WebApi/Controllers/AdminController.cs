@@ -31,7 +31,6 @@ namespace AthEna_WebApi.Controllers
         }
 
 
-
         [BasicAuthentication]
         [Route("api/Vehicles/{vehicleId?}")]
         [HttpGet]
@@ -111,7 +110,6 @@ namespace AthEna_WebApi.Controllers
                 return StatusCode(500, _config["StatusCodesText:ServerErr"]);
             }
         }
-
 
 
 

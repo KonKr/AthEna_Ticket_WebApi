@@ -17,6 +17,7 @@ namespace AthEna_WebApi.Controllers
     {
         private ContactsRepository ContactsRepo;
         private IConfiguration _config;
+
         public ContactsController(IConfiguration configuration)
         {
             ContactsRepo = new ContactsRepository();
@@ -24,15 +25,15 @@ namespace AthEna_WebApi.Controllers
         }
 
 
-        [Route("api/Contact/{contactGuid?}")] //get info about a specific contact or all...
+        [Route("api/ContactWithCard/{contactGuid?}")] //get info about a specific contact or all...
         [HttpGet]
-        public IActionResult GetContacts(Guid contactGuid)
+        public IActionResult GetContact_WithCard(Guid contactGuid)
         {
             try
             {
                 if(contactGuid == Guid.Empty)
-                    return Ok(ContactsRepo.GetAllContacts()); //to return all contacts
-                return Ok(ContactsRepo.GetContact(contactGuid));
+                    return Ok(ContactsRepo.GetAllContacts_WithCards()); //to return all contacts
+                return Ok(ContactsRepo.GetContact_WithCard(contactGuid));
             }
             catch (Exception e)
             {

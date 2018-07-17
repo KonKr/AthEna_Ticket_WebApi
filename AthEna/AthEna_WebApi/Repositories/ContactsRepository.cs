@@ -7,9 +7,8 @@ using System.Linq;
 namespace AthEna_WebApi.Repositories
 {
     public class ContactsRepository : InitialRepository
-    {
-       
-        public List<Contact> GetAllContacts()
+    {       
+        public List<Contact> GetAllContacts_WithCards()
         {
             try
             {
@@ -22,7 +21,7 @@ namespace AthEna_WebApi.Repositories
             }
         }
 
-        public Contact GetContact(Guid contactGuid)
+        public Contact GetContact_WithCard(Guid contactGuid)
         {
             try
             {
@@ -71,8 +70,7 @@ namespace AthEna_WebApi.Repositories
             {
                 return false;
             }
-        }
-       
+        }      
 
     }
 }
