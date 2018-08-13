@@ -25,15 +25,15 @@ namespace AthEna_WebApi.Controllers
         }
 
 
-        [Route("api/ContactWithCard/{contactGuid?}")] //get info about a specific contact or all...
+        [Route("api/ContactWithCard/{contact_IdentityCardNum?}")] //get info about a specific contact or all...
         [HttpGet]
-        public IActionResult GetContact_WithCard(Guid contactGuid)
+        public IActionResult GetContact_WithCard(string contact_IdentityCardNum)
         {
             try
             {
-                if(contactGuid == Guid.Empty)
-                    return Ok(ContactsRepo.GetAllContacts_WithCards()); //to return all contacts
-                return Ok(ContactsRepo.GetContact_WithCard(contactGuid));
+                if(contact_IdentityCardNum == null)//If the Identity Card Number is not specified...
+                    return Ok(ContactsRepo.GetAllContactsWithCards()); //Return all contacts...
+                return Ok(ContactsRepo.GetContactWithCard(contact_IdentityCardNum)); //Return specific contact...
             }
             catch (Exception e)
             {
@@ -51,7 +51,7 @@ namespace AthEna_WebApi.Controllers
             {
                 if (ModelState.IsValid)//checking model state
                 {
-                    var contactWithCard_CreationResult = ContactsRepo.CreateNewContact_WithCard(newContactWithCard);
+                    var contactWithCard_CreationResult = ContactsRepo.CreateNewContactWithCard(newContactWithCard);
                     if (contactWithCard_CreationResult.GetType() == typeof(ContactWithCard_Created_ViewModel) )
                         return Ok(contactWithCard_CreationResult); //if the creation is successful return the id of the new contact as well as the id of the new card...
                     return BadRequest(); //if not... return bad request...

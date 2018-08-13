@@ -20,12 +20,14 @@ namespace AthEna_WebApi.Controllers
         private VehiclesRepository VehiclesRepo;
         private MetroStationRepository MetroStationRepo;
         private RouteRepository RouteRepo;
+        private ValidationHistoryRepository ValidationRepo;
 
         public AdminController(IConfiguration Configuration)
         {            
             VehiclesRepo = new VehiclesRepository();
             MetroStationRepo = new MetroStationRepository();
             RouteRepo = new RouteRepository();
+            ValidationRepo = new ValidationHistoryRepository();
 
             _config = Configuration;
         }
@@ -145,6 +147,36 @@ namespace AthEna_WebApi.Controllers
                     return BadRequest(); //if not... return bad request...
                 }
                 return BadRequest(ModelState);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, _config["StatusCodesText:ServerErr"]);
+            }
+        }
+
+        [BasicAuthentication]
+        [Route("api/ValidationHistory/DaysDepth/{daysDepth}/ContactIdCardNum/{idCardNum}")]
+        public IActionResult GetValidationHistory_SpecificUser(int daysDepth, String idCardNum)
+        {
+            try
+            {
+                var validationHistory = ValidationRepo.GetValidationActivityHistory_SpecificUser(daysDepth, idCardNum);
+                return Ok(validationHistory);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, _config["StatusCodesText:ServerErr"]);
+            }
+        }
+
+        [BasicAuthentication]
+        [Route("api/ValidationHistory/DaysDepth/{daysDepth}")]
+        public IActionResult GetValidationHistory(int daysDepth, String idCardNum)
+        {
+            try
+            {
+                var validationHistory = ValidationRepo.GetValidationActivityHistory(daysDepth);
+                return Ok(validationHistory);
             }
             catch (Exception e)
             {

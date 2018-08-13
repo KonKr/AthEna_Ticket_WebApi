@@ -19,8 +19,6 @@ namespace AthEna_WebApi.ViewModels
 
         [Range(1, int.MaxValue)]
         public int SocialSecurityNum { get; set; }
-
-        [Range(1, 100)]
-        public int InitialCardCharge { get; set; }
+                
     }
 }
