@@ -111,12 +111,13 @@ namespace AthEna_WebApi.Controllers
             }
             catch (Exception e)
             {
+                if (((System.Data.SqlClient.SqlException)e.InnerException).Number == 2627) // unique key violation from sql server...
+                    return StatusCode(400, _config["StatusCodesText:GeneralInputError"]);
                 return StatusCode(500, _config["StatusCodesText:ServerErr"]);
             }
         }
 
 
-        //hello jim
 
         [BasicAuthentication]
         [Route("api/Routes/{routeId?}")]
