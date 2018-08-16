@@ -35,7 +35,10 @@ namespace AthEna_WebApi.Controllers
                     var cardRechargeResult = CardsRepo.RechargeCard(rechargeCardInfo);
                     if (cardRechargeResult.GetType() == typeof(CardChargeExpirationDate_ViewModel))
                         return Ok(cardRechargeResult); //if the creation is successful return the new Expiration date 
-                    return BadRequest(_config["StatusCodesText:RechargeCardErr"]); //if not... return bad request...
+                    if(!(rechargeCardInfo.ChargeEuros == 30 || rechargeCardInfo.ChargeEuros == 60 || rechargeCardInfo.ChargeEuros == 200))
+                        return BadRequest(_config["StatusCodesText:RechargeCardErr"]); //if not... return bad request...
+                    if (cardRechargeResult.GetType() == typeof(bool))
+                        return BadRequest(_config["StatusCodesText:RechargeCardErr2"]);
                 }
                 return BadRequest(ModelState); //if model state is not valid
             }
