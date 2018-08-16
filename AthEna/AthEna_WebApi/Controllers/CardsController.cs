@@ -59,6 +59,11 @@ namespace AthEna_WebApi.Controllers
                 {
                     //check the validity of the card...
                     var cardValidity = CardsRepo.CheckCardsValidity(validationInfo.ValidatingCardId);
+
+                    //if card is not valid, and expirationdate is less than 1/1/2000, then the card does not exist...
+                    if (!cardValidity.Validity && cardValidity.ExpirationDate < Convert.ToDateTime("2000-01-01"))
+                        return BadRequest(_config["StatusCodesText:GeneralInputError"]);
+
                     if (!cardValidity.Validity)
                         return BadRequest(_config["TicketValidationResult:FailedValidation_dueTo_ExpiredSubscription"]);
 
@@ -96,6 +101,11 @@ namespace AthEna_WebApi.Controllers
 
                     //check the validity of the card...
                     var cardValidity = CardsRepo.CheckCardsValidity(validationInfo.ValidatingCardId);
+
+                    //if card is not valid, and expirationdate is less than 1/1/2000, then the card does not exist...
+                    if (!cardValidity.Validity && cardValidity.ExpirationDate < Convert.ToDateTime("2000-01-01"))
+                        return BadRequest(_config["StatusCodesText:GeneralInputError"]);
+
                     if (!cardValidity.Validity)
                         return BadRequest(_config["TicketValidationResult:FailedValidation_dueTo_ExpiredSubscription"]);
 
