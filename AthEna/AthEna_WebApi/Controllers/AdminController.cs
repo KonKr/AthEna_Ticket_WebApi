@@ -114,6 +114,7 @@ namespace AthEna_WebApi.Controllers
         }
 
 
+        //hello jim
 
         [BasicAuthentication]
         [Route("api/Routes/{routeId?}")]
@@ -153,6 +154,8 @@ namespace AthEna_WebApi.Controllers
                 return StatusCode(500, _config["StatusCodesText:ServerErr"]);
             }
         }
+
+
 
         [BasicAuthentication]
         [Route("api/ValidationHistory/DaysDepth/{daysDepth}/ContactIdCardNum/{idCardNum}")]
