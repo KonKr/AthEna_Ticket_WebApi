@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AthEna Card Portal</title>
+
+    <link rel="shortcut icon" href="oasaLogo.png" />
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+    <!-- Bootsrap Javascript -->
+    <script    src="https://code.jquery.com/jquery-3.3.1.js"    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Custom Js script -->
+    <script src="script.js"></script>
+
+</head>
+<body>
+    <!-- Navbar goes here... -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light-custom">
+        <a class="navbar-brand mb-0 h1" href="#">
+            <img src="oasaLogo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            AthEna Card Portal
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto"> 
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-users"></i> Manage Contacts With Cards
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#"><i class="fas fa-glasses"></i> Get All Contacts with associated cards</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-plus"></i> Create new Contact with associated card</a>
+                    
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-id-card"></i> Interact with Cards
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#"><i class="fas fa-charging-station"></i> Recharge Card</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-subway"></i> Validate Card on Metro Station</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-bus-alt"></i> Validate Card on a Bus</a>
+                    
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-toolbox"></i> Manage System (Admin)
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#"><i class="fas fa-bus"></i> Get Vehicles</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-plus"></i> Create new Vehicle</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#"><i class="fas fa-route"></i> Get Routes</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-plus"></i> Create new Route</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#"><i class="fas fa-subway"></i> Get Metro Stations</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-plus"></i></i> Create new Metro Station</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#"><i class="fas fa-search"></i> Get Validation History</a>                            
+                        </div>
+                    </li>
+
+            </ul>                
+        </div>
+    </nav>
+    
+    <!-- Carousel goes here... -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active ">
+                <div class="carousel-instance1"></div>
+                <div class="carousel-caption d-none d-md-block">
+                    <h1 class="display-3"><i class="fas fa-cogs"></i></h1>
+                    <h1 class="display-3">Manage Resources in just seconds!</h1><br>
+                    <p>With AthEna Portal, you are able to manage system resources, vehicles, stations and routes, as fast as possible! </p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="carousel-instance2"></div>
+                <div class="carousel-caption d-none d-md-block">
+                    <h1 class="display-3"><i class="fas fa-bolt"></i></h1>
+                    <h1 class="display-3">Recharge your card fast!</h1><br>
+                    <p>With Ath Ena Ticket Platform, you can easily recharge your AthEna card, and be able to use it instantly.</p>
+                </div>
+            </div>                
+        </div> 
+    </div>    
+
+    <br><br>
+
+    <!-- Container goes here... -->
+    <div class="container">
+        <!-- Manage contacts with cards -->
+        <h1>Manage Contacts with Cards</h1>
+        <p class="lead">In this section, we can either get all contacts and their associated cards or create a new one with just a simple API Call.</p>
+            
+            <h4 class="gray-custom">Get Contacts with associated cards</h4>
+            <p class="lead">Returns a list of all contacts and cards found in the database.</p>
+            <button type="button" class="btn btn-success" onclick="test();">Get List</button> <br><br>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">ID Card Num</th>
+                    <th scope="col">Card Registered on</th>
+                    <th scope="col">Card Charge Expires on</th>
+                    </tr>
+                </thead>
+                <tbody id="getContactsWithCards_TBody">     
+                                 
+                </tbody>
+            </table>    
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+</body>
+</html>
