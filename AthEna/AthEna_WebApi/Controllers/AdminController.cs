@@ -154,6 +154,8 @@ namespace AthEna_WebApi.Controllers
             }
         }
 
+
+
         [BasicAuthentication]
         [Route("api/ValidationHistory/DaysDepth/{daysDepth}/ContactIdCardNum/{idCardNum}")]
         public IActionResult GetValidationHistory_SpecificUser(int daysDepth, String idCardNum)

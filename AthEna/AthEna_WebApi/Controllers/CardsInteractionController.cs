@@ -12,12 +12,12 @@ using Microsoft.Extensions.Configuration;
 namespace AthEna_WebApi.Controllers
 {
     [Produces("application/json")]
-    public class CardsController : Controller
+    public class CardsInteractionController : Controller
     {
         private CardsRepository CardsRepo;
         private IConfiguration _config;
 
-        public CardsController(IConfiguration Configuration)
+        public CardsInteractionController(IConfiguration Configuration)
         {
             CardsRepo = new CardsRepository();
             _config = Configuration;
