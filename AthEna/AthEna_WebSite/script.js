@@ -20,7 +20,9 @@ function getContactsWithCardsAPI(){
         //after ajax is complete, deal with the result data...
         $('#getContactsWithCards_TBody').empty();
         response.forEach(element => {
-            $('#getContactsWithCards_TBody').append('<tr><td>' + element.contact_FirstName + '</td><td>' + element.contact_LastName + '</td><td>' + element.contact_IdCardNum + '</td><td>' + element.card_RegisteredOn + '</td><td>' + element.card_ChargeExpiresOn + '</td></tr>');
+            var registeredDateToPrint = dateFormat(new Date(element.card_RegisteredOn), "dd/mm/yy, h:MM:ss TT" );
+            var expirationDateToPrint = dateFormat(new Date(element.card_ChargeExpiresOn), "dd/mm/yy, h:MM:ss TT" );
+            $('#getContactsWithCards_TBody').append('<tr><td>' + element.contact_FirstName + '</td><td>' + element.contact_LastName + '</td><td>' + element.contact_IdCardNum + '</td><td>' + registeredDateToPrint + '</td><td>' + expirationDateToPrint + '</td></tr>');
         });
       });
 }
