@@ -89,3 +89,9 @@ function rechargeCard(CardId, ChargeEuros, event){
   }); 
 
 }
+
+
+function testme(string){
+  var encodedString = btoa(string);
+  alert(encodedString);
+}
