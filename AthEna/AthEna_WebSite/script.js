@@ -3,6 +3,7 @@ var apiHostUrl = "http://athenaticket.ddns.net";
 
 function getContactsWithCardsAPI(){
     //Initiate call...
+    $('#getContactsWithCards_TBody').empty();
     $('#getContactsWithCards_TBody').append('<tr><td colspan="5"><br><center><h1><i class="fas fa-spinner fa-spin"></i></h1></td></tr>');
     var settings = {
         "async": true,
@@ -41,7 +42,7 @@ function createNewContactWithCard(FirstName, LastName, IdCardNum, SocialSecurity
     "processData": false,
     "data": "{\n\t\"FirstName\":\"" + FirstName + "\",\n\t\"LastName\":\"" + LastName + "\",\n\t\"IdCardNum\":\"" + IdCardNum +"\",\n\t\"SocialSecurityNum\":" + SocialSecurityNum + "\n}"
   }
-  var apiCall = 
+  
   //If create new attempt is sucessfull...
   $.ajax(settings)
   .done(function (response) {
@@ -55,4 +56,34 @@ function createNewContactWithCard(FirstName, LastName, IdCardNum, SocialSecurity
     }    
   });
   
+}
+
+function rechargeCard(CardId, ChargeEuros, event){
+  event.preventDefault();
+
+  var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": apiHostUrl + "/api/Card/Recharge",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json",
+      "Cache-Control": "no-cache",
+    },
+    "processData": false,
+    "data": "{\n\t\"CardId\":\"" + CardId + "\",\n\t\"ChargeEuros\":" + ChargeEuros + "\n}"
+  }
+  
+  $.ajax(settings)
+  .done(function (response) {
+    alert("Card was successfully recharged. New exparation date was set as " + response.chargeExpirationDate);
+  })
+  .fail(function(jqXHR, status){
+    if (jqXHR.status == 400) {
+      alert("Bad Request. Please review your data.");
+    }else{
+      alert("An error occured.");
+    }    
+  }); 
+
 }
