@@ -5,14 +5,6 @@ VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AthEna_WebApi", "AthEna_WebApi\AthEna_WebApi.csproj", "{8B5BABD5-6CEA-4C7D-8F80-7647DCD4DE2B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AthEna_WebSite", "AthEna_WebSite", "{4A6DDD8B-57AF-492B-B16D-FE1A5B7B41C7}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\AthEna_Portal.html = ..\..\..\..\AthEna_Portal.html
-		..\..\..\..\oasaLogo.png = ..\..\..\..\oasaLogo.png
-		..\..\..\..\script.js = ..\..\..\..\script.js
-		..\..\..\..\style.css = ..\..\..\..\style.css
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

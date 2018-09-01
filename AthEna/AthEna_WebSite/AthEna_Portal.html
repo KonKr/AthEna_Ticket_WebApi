@@ -28,7 +28,7 @@
 </head>
 <body>
     <!-- Navbar goes here... -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light-custom">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light-custom" id="navId">
         <a class="navbar-brand mb-0 h1" href="#">
             <img src="oasaLogo.png" width="30" height="30" class="d-inline-block align-top" alt="">
             AthEna Card Portal
@@ -44,8 +44,8 @@
                         <i class="fas fa-users"></i> Manage Contacts With Cards
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#"><i class="fas fa-glasses"></i> Get All Contacts with associated cards</a>
-                    <a class="dropdown-item" href="#"><i class="fas fa-plus"></i> Create new Contact with associated card</a>
+                    <a class="dropdown-item" href="#GetContactsWithCards"><i class="fas fa-glasses"></i> Get All Contacts with associated cards</a>
+                    <a class="dropdown-item" href="#CreateNewContactWithCard"><i class="fas fa-plus"></i> Create new Contact with associated card</a>
                     
                     </div>
                 </li>
@@ -118,25 +118,40 @@
         <h1>Manage Contacts with Cards</h1>
         <p class="lead">In this section, we can either get all contacts and their associated cards or create a new one with just a simple API Call.</p>
             
-            <h4 class="gray-custom">Get Contacts with associated cards</h4>
+            <h4 class="gray-custom my-5" id="GetContactsWithCards" >Get Contacts with associated cards</h4>
             <p class="lead">Returns a list of all contacts and cards found in the database.</p>
-            <button type="button" class="btn btn-success" onclick="test();">Get List</button> <br><br>
-            <table class="table">
-                <thead class="thead-light">
-                    <tr>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">ID Card Num</th>
-                    <th scope="col">Card Registered on</th>
-                    <th scope="col">Card Charge Expires on</th>
-                    </tr>
-                </thead>
-                <tbody id="getContactsWithCards_TBody">     
-                                 
-                </tbody>
-            </table>    
-
-
+                <button type="button" class="btn btn-success" onclick="getContactsWithCardsAPI();">Get List</button> <br><br>
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">ID Card Num</th>
+                        <th scope="col">Card Registered on</th>
+                        <th scope="col">Card Charge Expires on</th>
+                        </tr>
+                    </thead>
+                    <tbody id="getContactsWithCards_TBody">     
+                                    
+                    </tbody>
+                </table>    
+            
+            <br>
+            <h4 class="gray-custom" id="CreateNewContactWithCard" data-offset="500">Create a new Contact with associated card</h4>
+            <p class="lead">Create a new Contact and a new AthEna card to be associated with.</p>          
+                <form onsubmit="createNewContactWithCard(FirstName.value, LastName.value, IdCardNum.value, SocialSecurityNum.value, event);" action="#">
+                    <div class="form-group-custom bg-light form-group">
+                        <div class="col-sm-3">
+                            <br>
+                            <input type="text" name="FirstName" placeholder="First Name" class="form-control" required><br>
+                            <input type="text" name="LastName" placeholder="Last Name" class="form-control" required /><br>
+                            <input type="text" name="IdCardNum" placeholder="Identity Card Number" class="form-control" required /><br>
+                            <input type="number" name="SocialSecurityNum" placeholder="Social Security Number" class="form-control" required /><br>
+                            <button type="submit" class="btn btn-info">Create New</button>
+                        </div>
+                    </div>
+                </form>                  
+                
 
 
 

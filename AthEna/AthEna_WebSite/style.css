@@ -15,8 +15,22 @@
 
 .bg-light-custom{
     background-color: rgba(255,255,255,0.9)!important;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
 }
 
 .gray-custom{
     color: darkgray!important;
 }
+
+.form-group-custom{
+    width: 100%;
+    padding:15px;
+    border-radius: 10px;
+}
+
+:target:before {
+    content:"";
+    display:block;
+    height:90px; /* fixed header height*/
+    margin:-90px 0 0; /* negative fixed header height */
+    }
