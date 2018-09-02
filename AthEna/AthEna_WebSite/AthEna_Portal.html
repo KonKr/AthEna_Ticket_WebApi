@@ -122,7 +122,7 @@
             <h4 class="gray-custom" id="GetContactsWithCards">Get Contacts with associated cards</h4>
             <p class="lead">Returns a list of all contacts and cards found in the database.</p>
             <button type="button" class="btn btn-success" onclick="getContactsWithCardsAPI();">Get List</button> <br><br>
-            <table class="table">
+            <table class="table table-striped table-hover">
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">First Name</th>
@@ -146,7 +146,7 @@
                         <input type="text" name="FirstName" placeholder="First Name" class="form-control" required><br>
                         <input type="text" name="LastName" placeholder="Last Name" class="form-control" required /><br>
                         <input type="text" name="IdCardNum" placeholder="Identity Card Number" class="form-control" required /><br>
-                        <input type="number" name="SocialSecurityNum" placeholder="Social Security Number" class="form-control" required /><br>
+                        <input type="number" name="SocialSecurityNum" placeholder="Social Security Number" max="2147483647" class="form-control" required /><br>
                         <button type="submit" class="btn btn-info">Create New</button>
                     </div>
                 </div>
@@ -180,11 +180,11 @@
                     <div class="col-sm-4">
                         <br>
                         <input type="text" name="CardId" placeholder="AthEna Card GUID" class="form-control" required><br>
-                        <input type="text" name="ValidatingAtStationId" placeholder="Metro Staion GUID" class="form-control" required><br>
+                        <input type="text" name="ValidatingAtStationId" placeholder="Metro Station GUID" class="form-control" required><br>
                         <select class="custom-select" name="ValidationOnEmbarkation" required>
-                            <option selected value="">Embarkation</option>
-                            <option value="true">True</option>
-                            <option value="false">False</option>
+                            <option selected value="">Select Action</option>
+                            <option value="true">Embarkation</option>
+                            <option value="false">Disembarkation</option>
                         </select>
                         <br><br>
                         <button type="submit" class="btn btn-info">Validate Card at Metro</button>
@@ -201,7 +201,6 @@
                         <input type="text" name="RouteId" placeholder="Route ID" class="form-control" required><br>
                         <input type="text" name="ValidatingCardId" placeholder="AthEna Card GUID" class="form-control" required><br>
                         <input type="text" name="ValidatingAtBusId" placeholder="Bus ID" class="form-control" required><br>
-                        <br><br>
                         <button type="submit" class="btn btn-info">Validate Card on Bus</button>
                     </div>
                 </div>
@@ -209,12 +208,12 @@
 
             <!-- Manage System (Admin) -->
             <h1>Manage System (Admin)</h1>
-            <p class="lead">In this section, we can manage the whole system.</p>
+            <p class="lead">In this section, resources of the system can be managed.</p>
 
             <h4 class="gray-custom" id="GetVehicles">Get Vehicles</h4>
-            <p class="lead">Returns a list of all information of the Vehicles listed in our database.</p>
-            <button type="button" class="btn btn-success" onclick="getVehicles();">Get Vehicles</button> <br><br>
-            <table class="table">
+            <p class="lead">Returns a list of All Vehicles in the database.</p>
+            <button type="button" class="btn btn-success" onclick="getVehicles();">Get List</button> <br><br>
+            <table class="table table-striped table-hover">
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">License Plate</th>
@@ -226,15 +225,16 @@
 
             <br>
             <h4 class="gray-custom" id="CreateNewVehicle" data-offset="500">Create a new Vehicle</h4>
-            <p class="lead">Create a new Bus. All you need is the Vehicle's license Plate.</p>
+            <p class="lead">Creating a New Bus entry. Vehicle's License Plate is required.</p>
             <form onsubmit="createNewVehicle(Username.value, Password.value, LicensePlate.value, event);" action="#">
                 <div class="form-group-custom bg-light form-group">
                     <div class="col-sm-4">
                         <br>
                         <p class="blockquote-footer"> Admin permission </p>
-                        <input type="text" name="Username" placeholder="Username" class="form-control" required>
+                        <input type="text" name="Username" placeholder="Username" class="form-control" required><br>
                         <input type="password" name="Password" placeholder="Password" class="form-control" required /><br>
 
+                        <p class="blockquote-footer"> Input Data Required </p>
                         <input type="text" name="LicensePlate" placeholder="License Plate" class="form-control" required /><br>
 
                         <button type="submit" class="btn btn-info">Create New</button>
@@ -245,7 +245,7 @@
             <h4 class="gray-custom" id="GetRoutes">Get Routes</h4>
             <p class="lead">Returns a list of all routes contained in database.</p>
             <button type="button" class="btn btn-success" onclick="getRoutes();">Get Routes</button> <br><br>
-            <table class="table">
+            <table class="table table-striped table-hover">
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">Route Id</th>
@@ -258,16 +258,17 @@
             </table>
 
             <br>
-            <h4 class="gray-custom" id="CreateNewRoute" data-offset="500">Create a new Route</h4>
+            <h4 class="gray-custom" id="CreateNewRoute" data-offset="500">Create new Route</h4>
             <p class="lead">Create a new Bus Route to trasport across the whole city.</p>
             <form onsubmit="createNewRoute(Username.value, Password.value, RouteCodeNum.value, RouteEndPoint.value, RouteStartPoint.value, event);" action="#">
                 <div class="form-group-custom bg-light form-group">
                     <div class="col-sm-4">
                         <br>
                         <p class="blockquote-footer"> Admin permission </p>
-                        <input type="text" name="Username" placeholder="Username" class="form-control" required>
+                        <input type="text" name="Username" placeholder="Username" class="form-control" required><br>
                         <input type="password" name="Password" placeholder="Password" class="form-control" required /><br>
 
+                        <p class="blockquote-footer"> Input Data Required </p>
                         <input type="text" name="RouteCodeNum" placeholder="Route Code Num" class="form-control" required /><br>
                         <input type="text" name="RouteStartPoint" placeholder="Route Start Point" class="form-control" required /><br>
                         <input type="text" name="RouteEndPoint" placeholder="Route End Point" class="form-control" required /><br>
@@ -280,7 +281,7 @@
             <h4 class="gray-custom" id="GetMetroStations">Get Metro Stations</h4>
             <p class="lead">Returns a list of all Metro Stations listed in database.</p>
             <button type="button" class="btn btn-success" onclick="getMetroStations();">Get Metro Stations</button> <br><br>
-            <table class="table">
+            <table class="table table-striped table-hover">
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">Station Id</th>
@@ -300,9 +301,10 @@
                     <div class="col-sm-4">
                         <br>
                         <p class="blockquote-footer"> Admin permission </p>
-                        <input type="text" name="Username" placeholder="Username" class="form-control" required>
+                        <input type="text" name="Username" placeholder="Username" class="form-control" required><br>
                         <input type="password" name="Password" placeholder="Password" class="form-control" required /><br>
 
+                        <p class="blockquote-footer"> Input Data Required </p>
                         <input type="text" name="StationName" placeholder="Station Name" class="form-control" required /><br>
                         <input type="number" name="IsOnLine" placeholder="Line Num" class="form-control" required /><br>
 
@@ -313,32 +315,34 @@
 
             <h4 class="gray-custom" id="GetValidationHistory">Get Validation History</h4>
             <p class="lead">Returns a list of all Validations as on Embarkation as long as on Disembarkation for a specific days depth.</p>
-                <button type="button" onclick="getValidationHistory();" class="btn btn-success">Get History</button>
-                <br><div style="display:inline-block" class="col-sm-4">
-                    <br><input type="number" name="DDays" placeholder="Days Depth" class="form-control" required/>
-                </div> <br><br>
-
+            <div class="form-inline">
+                <input type="number"  style=" margin-right:15px;" name="DDays" placeholder="Days Depth" class="form-control col-sm-3" required/> <button type="button" onclick="getValidationHistory();" class="btn btn-success">Get History</button>
+            </div>
+            <br>
+                
+            <div class="sub-container-for-table">
+                <table class="table table-striped table-hover custom-max-size">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Vactivity Id</th>
+                            <th scope="col">Validated On</th>
+                            <th scope="col">Validated At</th>
+                            <th scope="col">Station Id</th>
+                            <th scope="col">Bus Id</th>
+                            <th scope="col">Route Id</th>
+                            <th scope="col">Card Id</th>
+                            <th scope="col">Bus</th>
+                            <th scope="col">Card</th>
+                            <th scope="col">Route</th>
+                            <th scope="col">Station</th>
+    
+                        </tr>
+                    </thead>
+                    <tbody id="getValidationHistory_TBody"></tbody>
+                </table>
+            </div>
             
-            <table class="table">
-                <thead class="thead-light">
-                    <tr>
-                        <th scope="col">History Id</th>
-                        <th scope="col">Vactivity Id</th>
-                        <th scope="col">validated On</th>
-                        <th scope="col">validated At</th>
-                        <th scope="col">Station Id</th>
-                        <th scope="col">Bus Id</th>
-                        <th scope="col">Route Id</th>
-                        <th scope="col">Card Id</th>
-                        <th scope="col">Bus</th>
-                        <th scope="col">Card</th>
-                        <th scope="col">Route</th>
-                        <th scope="col">Station</th>
-
-                    </tr>
-                </thead>
-                <tbody id="getValidationHistory_TBody"></tbody>
-            </table>
+            
 
         </div>
 

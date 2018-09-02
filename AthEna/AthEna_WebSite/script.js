@@ -4,7 +4,7 @@ var apiHostUrl = "http://athenaticket.ddns.net";
 function getContactsWithCardsAPI(){
     //Initiate call...
     $('#getContactsWithCards_TBody').empty();
-    $('#getContactsWithCards_TBody').append('<tr><td colspan="5"><br><center><h1><i class="fas fa-spinner fa-spin"></i></h1></td></tr>');
+    $('#getContactsWithCards_TBody').append('<tr><td colspan="20"><br><center><h1><i class="fas fa-spinner fa-spin"></i></h1></td></tr>');
     var settings = {
         "async": true,
         "crossDomain": true,
@@ -53,6 +53,8 @@ function createNewContactWithCard(FirstName, LastName, IdCardNum, SocialSecurity
   .fail(function(jqXHR, status){
     if (jqXHR.status == 400) {
       alert("Bad Request. Please review your data.");
+    }else if(jqXHR.status == 401){
+        alert("Unauthorized request. Please review your credentials.");
     }else{
       alert("An error occured.");
     }    
@@ -83,6 +85,8 @@ function rechargeCard(CardId, ChargeEuros, event){
   .fail(function(jqXHR, status){
     if (jqXHR.status == 400) {
       alert("Bad Request. Please review your data.");
+    }else if(jqXHR.status == 401){
+        alert("Unauthorized request. Please review your credentials.");
     }else{
       alert("An error occured.");
     }    
@@ -113,6 +117,8 @@ function validateCardOnMetro(CardId, ValidatingAtStationId, ValidationOnEmbarkat
         .fail(function (jqXHR, status) {
             if (jqXHR.status == 400) {
                 alert("Bad Request. Please review your data.");
+            }else if(jqXHR.status == 401){
+                alert("Unauthorized request. Please review your credentials.");
             } else {
                 alert("An error occured.");
             }
@@ -143,6 +149,8 @@ function validateCardOnBus(RouteId, ValidatingCardId, ValidatingAtBusId, event) 
         .fail(function (jqXHR, status) {
             if (jqXHR.status == 400) {
                 alert("Bad Request. Please review your data.");
+            }else if(jqXHR.status == 401){
+                alert("Unauthorized request. Please review your credentials.");
             } else {
                 alert("An error occured.");
             }
@@ -152,7 +160,7 @@ function validateCardOnBus(RouteId, ValidatingCardId, ValidatingAtBusId, event) 
 
 function getVehicles() {
     $('#getVehicles_TBody').empty();
-    $('#getVehicles_TBody').append('<tr><td colspan="5"><br><center><h1><i class="fas fa-spinner fa-spin"></i></h1></td></tr>');
+    $('#getVehicles_TBody').append('<tr><td colspan="20"><br><center><h1><i class="fas fa-spinner fa-spin"></i></h1></td></tr>');
     var settings = {
         "async": true,
         "crossDomain": true,
@@ -175,6 +183,10 @@ function getVehicles() {
 }
 
 function createNewVehicle(Username, Password, LicensePlate, event) {
+    //test...
+
+    prompt();
+    
     //To prevent reloading in submitting form...
     event.preventDefault();
 
@@ -205,6 +217,8 @@ function createNewVehicle(Username, Password, LicensePlate, event) {
         .fail(function (jqXHR, status) {
             if (jqXHR.status == 400) {
                 alert("Bad Request. Please review your data.");
+            }else if(jqXHR.status == 401){
+                alert("Unauthorized request. Please review your credentials.");
             } else {
                 alert("An error occured.");
             }
@@ -214,7 +228,7 @@ function createNewVehicle(Username, Password, LicensePlate, event) {
 
 function getRoutes() {
     $('#getRoutes_TBody').empty();
-    $('#getRoutes_TBody').append('<tr><td colspan="5"><br><center><h1><i class="fas fa-spinner fa-spin"></i></h1></td></tr>');
+    $('#getRoutes_TBody').append('<tr><td colspan="20"><br><center><h1><i class="fas fa-spinner fa-spin"></i></h1></td></tr>');
     var settings = {
         "async": true,
         "crossDomain": true,
@@ -267,6 +281,8 @@ function createNewRoute(Username, Password, RouteCodeNum, RouteEndPoint, RouteSt
         .fail(function (jqXHR, status) {
             if (jqXHR.status == 400) {
                 alert("Bad Request. Please review your data.");
+            }else if(jqXHR.status == 401){
+                alert("Unauthorized request. Please review your credentials.");
             } else {
                 alert("An error occured.");
             }
@@ -276,7 +292,7 @@ function createNewRoute(Username, Password, RouteCodeNum, RouteEndPoint, RouteSt
 
 function getMetroStations() {
     $('#getMetroStations_TBody').empty();
-    $('#getMetroStations_TBody').append('<tr><td colspan="5"><br><center><h1><i class="fas fa-spinner fa-spin"></i></h1></td></tr>');
+    $('#getMetroStations_TBody').append('<tr><td colspan="20"><br><center><h1><i class="fas fa-spinner fa-spin"></i></h1></td></tr>');
     var settings = {
         "async": true,
         "crossDomain": true,
@@ -330,7 +346,9 @@ function createNewMetroStation(Username, Password, StationName, IsOnLine, event)
         .fail(function (jqXHR, status) {
             if (jqXHR.status == 400) {
                 alert("Bad Request. Please review your data.");
-            } else {
+            }else if(jqXHR.status == 401){
+                alert("Unauthorized request. Please review your credentials.");
+            }else {
                 alert("An error occured.");
             }
         });
@@ -347,7 +365,7 @@ function getValidationHistory() {
     } else {
 
         $('#getValidationHistory_TBody').empty();
-        $('#getValidationHistory_TBody').append('<tr><td colspan="5"><br><center><h1><i class="fas fa-spinner fa-spin"></i></h1></td></tr>');
+        $('#getValidationHistory_TBody').append('<tr><td colspan="20"><br><center><h1><i class="fas fa-spinner fa-spin"></i></h1></td></tr>');
 
         var settings = {
             "async": true,
@@ -365,7 +383,7 @@ function getValidationHistory() {
             //after ajax is complete, deal with the result data...
             $('#getValidationHistory_TBody').empty();
             response.forEach(element => {
-                $('#getValidationHistory_TBody').append('<tr><td>' + element.id + '</td><td>' + element.vactivityId + '</td><td>' + element.validatedOn + '</td><td>' + element.validatedAt + '</td><td>' + element.stationId + '</td><td>' + element.busId + '</td><td>' + element.routeId + '</td><td>' + element.cardId + '</td><td>' + element.bus + '</td><td>' + element.card + '</td><td>' + element.route + '</td><td>' + element.station + '</td></tr>');
+                $('#getValidationHistory_TBody').append('<tr><td>' + element.vactivityId + '</td><td>' + element.validatedOn + '</td><td>' + element.validatedAt + '</td><td>' + element.stationId + '</td><td>' + element.busId + '</td><td>' + element.routeId + '</td><td>' + element.cardId + '</td><td>' + element.bus + '</td><td>' + element.card + '</td><td>' + element.route + '</td><td>' + element.station + '</td></tr>');
             });
         });
     }
