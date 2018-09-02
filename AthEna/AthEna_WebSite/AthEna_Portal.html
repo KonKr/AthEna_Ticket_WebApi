@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -68,18 +68,18 @@
                             <i class="fas fa-toolbox"></i> Manage System (Admin)
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#"><i class="fas fa-bus"></i> Get Vehicles</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-plus"></i> Create new Vehicle</a>
+                        <a class="dropdown-item" href="#GetVehicles"><i class="fas fa-bus"></i> Get Vehicles</a>
+                        <a class="dropdown-item" href="#CreateNewVehicle"><i class="fas fa-plus"></i> Create new Vehicle</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#"><i class="fas fa-route"></i> Get Routes</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-plus"></i> Create new Route</a>
+                        <a class="dropdown-item" href="#GetRoutes"><i class="fas fa-route"></i> Get Routes</a>
+                        <a class="dropdown-item" href="#CreateNewRoute"><i class="fas fa-plus"></i> Create new Route</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#"><i class="fas fa-subway"></i> Get Metro Stations</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-plus"></i></i> Create new Metro Station</a>
+                        <a class="dropdown-item" href="#GetMetroStations"><i class="fas fa-subway"></i> Get Metro Stations</a>
+                        <a class="dropdown-item" href="#CreateNewMetroStation"><i class="fas fa-plus"></i></i> Create new Metro Station</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#"><i class="fas fa-search"></i> Get Validation History</a>                            
+                        <a class="dropdown-item" href="#GetValidationHistory"><i class="fas fa-search"></i> Get Validation History</a>                            
                         </div>
-                    </li>
+                </li>
 
             </ul>                
         </div>
@@ -114,77 +114,233 @@
     <br><br>
 
     <!-- Container goes here... -->
-    <div class="container">
-        <!-- Manage contacts with cards -->
-        <h1>Manage Contacts with Cards</h1>
-        <p class="lead">In this section, we can either get all contacts and their associated cards or create a new one with just a simple API Call.</p>
-            
-            <h4 class="gray-custom" id="GetContactsWithCards" >Get Contacts with associated cards</h4>
+        <div class="container">
+            <!-- Manage contacts with cards -->
+            <h1>Manage Contacts with Cards</h1>
+            <p class="lead">In this section, we can either get all contacts and their associated cards or create a new one with just a simple API Call.</p>
+
+            <h4 class="gray-custom" id="GetContactsWithCards">Get Contacts with associated cards</h4>
             <p class="lead">Returns a list of all contacts and cards found in the database.</p>
-                <button type="button" class="btn btn-success" onclick="getContactsWithCardsAPI();">Get List</button> <br><br>
-                <table class="table">
-                    <thead class="thead-light">
-                        <tr>
+            <button type="button" class="btn btn-success" onclick="getContactsWithCardsAPI();">Get List</button> <br><br>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
                         <th scope="col">First Name</th>
                         <th scope="col">Last Name</th>
                         <th scope="col">ID Card Num</th>
+                        <th scope="col">AthEna Card GUID</th>
                         <th scope="col">Card Registered on</th>
                         <th scope="col">Card Charge Expires on</th>
-                        </tr>
-                    </thead>
-                    <tbody id="getContactsWithCards_TBody">     
-                                    
-                    </tbody>
-                </table>    
-            
+                    </tr>
+                </thead>
+                <tbody id="getContactsWithCards_TBody"></tbody>
+            </table>
+
             <br>
             <h4 class="gray-custom" id="CreateNewContactWithCard" data-offset="500">Create a new Contact with associated card</h4>
-            <p class="lead">Create a new Contact and a new AthEna card to be associated with.</p>          
-                <form onsubmit="createNewContactWithCard(FirstName.value, LastName.value, IdCardNum.value, SocialSecurityNum.value, event);" action="#">
-                    <div class="form-group-custom bg-light form-group">
-                        <div class="col-sm-4">
-                            <br>
-                            <input type="text" name="FirstName" placeholder="First Name" class="form-control" required><br>
-                            <input type="text" name="LastName" placeholder="Last Name" class="form-control" required /><br>
-                            <input type="text" name="IdCardNum" placeholder="Identity Card Number" class="form-control" required /><br>
-                            <input type="number" name="SocialSecurityNum" placeholder="Social Security Number" class="form-control" required /><br>
-                            <button type="submit" class="btn btn-info">Create New</button>
-                        </div>
+            <p class="lead">Create a new Contact and a new AthEna card to be associated with.</p>
+            <form onsubmit="createNewContactWithCard(FirstName.value, LastName.value, IdCardNum.value, SocialSecurityNum.value, event);" action="#">
+                <div class="form-group-custom bg-light form-group">
+                    <div class="col-sm-4">
+                        <br>
+                        <input type="text" name="FirstName" placeholder="First Name" class="form-control" required><br>
+                        <input type="text" name="LastName" placeholder="Last Name" class="form-control" required /><br>
+                        <input type="text" name="IdCardNum" placeholder="Identity Card Number" class="form-control" required /><br>
+                        <input type="number" name="SocialSecurityNum" placeholder="Social Security Number" class="form-control" required /><br>
+                        <button type="submit" class="btn btn-info">Create New</button>
                     </div>
-                </form> 
-                
-        <!-- Interact with Cards -->
-        <h1>Interact with Cards</h1>
-        <p class="lead">In this section, we can either charge a specific card or validate it on a metro station on embarkation/disembarkation or when boarding on a bus.</p>
-            <h4 class="gray-custom" id="RechargeCard" >Recharge Card</h4>
-            <p class="lead">Updates the expiration date of the AthEna Card you wish to recharge.</p>  
-                <form onsubmit="rechargeCard(CardId.value, ChargeEuros.value, event);" action="#">
-                    <div class="form-group-custom bg-light form-group">
-                        <div class="col-sm-4">
-                            <br>
-                            <input type="text" name="CardId" placeholder="AthEna Card GUID" class="form-control" required><br>  
-                            <select class="custom-select" name="ChargeEuros" required>
-                                <option selected value="">Choose Charge Amount</option>
-                                <option value="30">30</option>
-                                <option value="60">60</option>
-                                <option value="200">200</option>
-                            </select><br><br>                       
-                            <button type="submit" class="btn btn-info">Recharge Card</button>
-                        </div>
+                </div>
+            </form>
+            
+            <!-- Interact with Cards -->
+            <h1>Interact with Cards</h1>
+            <p class="lead">In this section, we can either charge a specific card or validate it on a metro station on embarkation/disembarkation or when boarding on a bus.</p>
+            <h4 class="gray-custom" id="RechargeCard">Recharge Card</h4>
+            <p class="lead">Updates the expiration date of the AthEna Card you wish to recharge.</p>
+            <form onsubmit="rechargeCard(CardId.value, ChargeEuros.value, event);" action="#">
+                <div class="form-group-custom bg-light form-group">
+                    <div class="col-sm-4">
+                        <br>
+                        <input type="text" name="CardId" placeholder="AthEna Card GUID" class="form-control" required><br>
+                        <select class="custom-select" name="ChargeEuros" required>
+                            <option selected value="">Choose Charge Amount</option>
+                            <option value="30">30</option>
+                            <option value="60">60</option>
+                            <option value="200">200</option>
+                        </select><br><br>
+                        <button type="submit" class="btn btn-info">Recharge Card</button>
                     </div>
-                </form>
-                
+                </div>
+            </form>
 
+            <h4 class="gray-custom" id="ValidateCardOnMetro">Validate Card On Metro</h4>
+            <p class="lead">Validate an AthEna Card on a metro station either on embarkation or on disembarkation.</p>
+            <form onsubmit="validateCardOnMetro(CardId.value, ValidatingAtStationId.value, ValidationOnEmbarkation.value, event);" action="#">
+                <div class="form-group-custom bg-light form-group">
+                    <div class="col-sm-4">
+                        <br>
+                        <input type="text" name="CardId" placeholder="AthEna Card GUID" class="form-control" required><br>
+                        <input type="text" name="ValidatingAtStationId" placeholder="Metro Staion GUID" class="form-control" required><br>
+                        <select class="custom-select" name="ValidationOnEmbarkation" required>
+                            <option selected value="">Embarkation</option>
+                            <option value="true">True</option>
+                            <option value="false">False</option>
+                        </select>
+                        <br><br>
+                        <button type="submit" class="btn btn-info">Validate Card at Metro</button>
+                    </div>
+                </div>
+            </form>
 
+            <h4 class="gray-custom" id="ValidateCardOnBus">Validate Card on Bus</h4>
+            <p class="lead">Validate an AthEna Card at bus on a specific route.</p>
+            <form onsubmit="validateCardOnBus(RouteId.value, ValidatingCardId.value, ValidatingAtBusId.value, event);" action="#">
+                <div class="form-group-custom bg-light form-group">
+                    <div class="col-sm-4">
+                        <br>
+                        <input type="text" name="RouteId" placeholder="Route ID" class="form-control" required><br>
+                        <input type="text" name="ValidatingCardId" placeholder="AthEna Card GUID" class="form-control" required><br>
+                        <input type="text" name="ValidatingAtBusId" placeholder="Bus ID" class="form-control" required><br>
+                        <br><br>
+                        <button type="submit" class="btn btn-info">Validate Card on Bus</button>
+                    </div>
+                </div>
+            </form>
 
+            <!-- Manage System (Admin) -->
+            <h1>Manage System (Admin)</h1>
+            <p class="lead">In this section, we can manage the whole system.</p>
 
+            <h4 class="gray-custom" id="GetVehicles">Get Vehicles</h4>
+            <p class="lead">Returns a list of all information of the Vehicles listed in our database.</p>
+            <button type="button" class="btn btn-success" onclick="getVehicles();">Get Vehicles</button> <br><br>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">License Plate</th>
+                        <th scope="col">Vehicle ID</th>
+                    </tr>
+                </thead>
+                <tbody id="getVehicles_TBody"></tbody>
+            </table>
 
+            <br>
+            <h4 class="gray-custom" id="CreateNewVehicle" data-offset="500">Create a new Vehicle</h4>
+            <p class="lead">Create a new Bus. All you need is the Vehicle's license Plate.</p>
+            <form onsubmit="createNewVehicle(Username.value, Password.value, LicensePlate.value, event);" action="#">
+                <div class="form-group-custom bg-light form-group">
+                    <div class="col-sm-4">
+                        <br>
+                        <p class="blockquote-footer"> Admin permission </p>
+                        <input type="text" name="Username" placeholder="Username" class="form-control" required>
+                        <input type="password" name="Password" placeholder="Password" class="form-control" required /><br>
 
+                        <input type="text" name="LicensePlate" placeholder="License Plate" class="form-control" required /><br>
 
+                        <button type="submit" class="btn btn-info">Create New</button>
+                    </div>
+                </div>
+            </form>
 
+            <h4 class="gray-custom" id="GetRoutes">Get Routes</h4>
+            <p class="lead">Returns a list of all routes contained in database.</p>
+            <button type="button" class="btn btn-success" onclick="getRoutes();">Get Routes</button> <br><br>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Route Id</th>
+                        <th scope="col">Route Code Num</th>
+                        <th scope="col">Route Start Point</th>
+                        <th scope="col">Route End Point</th>
+                    </tr>
+                </thead>
+                <tbody id="getRoutes_TBody"></tbody>
+            </table>
 
+            <br>
+            <h4 class="gray-custom" id="CreateNewRoute" data-offset="500">Create a new Route</h4>
+            <p class="lead">Create a new Bus Route to trasport across the whole city.</p>
+            <form onsubmit="createNewRoute(Username.value, Password.value, RouteCodeNum.value, RouteEndPoint.value, RouteStartPoint.value, event);" action="#">
+                <div class="form-group-custom bg-light form-group">
+                    <div class="col-sm-4">
+                        <br>
+                        <p class="blockquote-footer"> Admin permission </p>
+                        <input type="text" name="Username" placeholder="Username" class="form-control" required>
+                        <input type="password" name="Password" placeholder="Password" class="form-control" required /><br>
 
-    </div>
+                        <input type="text" name="RouteCodeNum" placeholder="Route Code Num" class="form-control" required /><br>
+                        <input type="text" name="RouteStartPoint" placeholder="Route Start Point" class="form-control" required /><br>
+                        <input type="text" name="RouteEndPoint" placeholder="Route End Point" class="form-control" required /><br>
+
+                        <button type="submit" class="btn btn-info">Create New</button>
+                    </div>
+                </div>
+            </form>
+
+            <h4 class="gray-custom" id="GetMetroStations">Get Metro Stations</h4>
+            <p class="lead">Returns a list of all Metro Stations listed in database.</p>
+            <button type="button" class="btn btn-success" onclick="getMetroStations();">Get Metro Stations</button> <br><br>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Station Id</th>
+                        <th scope="col">Station Name</th>
+                        <th scope="col">Line</th>
+                        <th scope="col">Also On Line</th>
+                    </tr>
+                </thead>
+                <tbody id="getMetroStations_TBody"></tbody>
+            </table>
+
+            <br>
+            <h4 class="gray-custom" id="CreateNewMetroStation" data-offset="500">Create New Metro Station</h4>
+            <p class="lead">Create New Metro Station with Station Name and the Line number.</p>
+            <form onsubmit="createNewMetroStation(Username.value, Password.value, StationName.value, IsOnLine.value, event);" action="#">
+                <div class="form-group-custom bg-light form-group">
+                    <div class="col-sm-4">
+                        <br>
+                        <p class="blockquote-footer"> Admin permission </p>
+                        <input type="text" name="Username" placeholder="Username" class="form-control" required>
+                        <input type="password" name="Password" placeholder="Password" class="form-control" required /><br>
+
+                        <input type="text" name="StationName" placeholder="Station Name" class="form-control" required /><br>
+                        <input type="number" name="IsOnLine" placeholder="Line Num" class="form-control" required /><br>
+
+                        <button type="submit" class="btn btn-info">Create New</button>
+                    </div>
+                </div>
+            </form>
+
+            <h4 class="gray-custom" id="GetValidationHistory">Get Validation History</h4>
+            <p class="lead">Returns a list of all Validations as on Embarkation as long as on Disembarkation for a specific days depth.</p>
+                <button type="button" onclick="getValidationHistory();" class="btn btn-success">Get History</button>
+                <br><div style="display:inline-block" class="col-sm-4">
+                    <br><input type="number" name="DDays" placeholder="Days Depth" class="form-control" required/>
+                </div> <br><br>
+
+            
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">History Id</th>
+                        <th scope="col">Vactivity Id</th>
+                        <th scope="col">validated On</th>
+                        <th scope="col">validated At</th>
+                        <th scope="col">Station Id</th>
+                        <th scope="col">Bus Id</th>
+                        <th scope="col">Route Id</th>
+                        <th scope="col">Card Id</th>
+                        <th scope="col">Bus</th>
+                        <th scope="col">Card</th>
+                        <th scope="col">Route</th>
+                        <th scope="col">Station</th>
+
+                    </tr>
+                </thead>
+                <tbody id="getValidationHistory_TBody"></tbody>
+            </table>
+
+        </div>
 
 </body>
 </html>
