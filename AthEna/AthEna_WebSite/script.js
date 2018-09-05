@@ -1,5 +1,5 @@
 //Declare config variables...
-var apiHostUrl = "http://athenaticket.ddns.net";
+var apiHostUrl = "http://athenacard-api.ddns.net";
 
 function getContactsWithCardsAPI(){
     //Initiate call...
@@ -24,6 +24,15 @@ function getContactsWithCardsAPI(){
             var expirationDateToPrint = dateFormat(new Date(element.card_ChargeExpiresOn), "dd/mm/yy, h:MM:ss TT" );
             $('#getContactsWithCards_TBody').append('<tr><td>' + element.contact_FirstName + '</td><td>' + element.contact_LastName + '</td><td>' + element.contact_IdCardNum + '</td><td>' + element.card_Guid + '</td><td>' + registeredDateToPrint + '</td><td>' + expirationDateToPrint + '</td></tr>');
         });
+      })
+      .fail(function(jqXHR, status){
+        if (jqXHR.status == 400) {
+          alert("Bad Request. Please review your data.");
+        }else if(jqXHR.status == 401){
+            alert("Unauthorized request. Please review your credentials.");
+        }else{
+          alert("An error occured.");
+        }    
       });
 }
 
@@ -179,14 +188,19 @@ function getVehicles() {
         response.forEach(element => {
             $('#getVehicles_TBody').append('<tr><td>' + element.licensePlate + '</td><td>' + element.vehicleId + '</td></tr>');
         });
-    });
+    })
+    .fail(function(jqXHR, status){
+        if (jqXHR.status == 400) {
+          alert("Bad Request. Please review your data.");
+        }else if(jqXHR.status == 401){
+            alert("Unauthorized request. Please review your credentials.");
+        }else{
+          alert("An error occured.");
+        }    
+      });
 }
 
-function createNewVehicle(Username, Password, LicensePlate, event) {
-    //test...
-
-    prompt();
-    
+function createNewVehicle(Username, Password, LicensePlate, event) {    
     //To prevent reloading in submitting form...
     event.preventDefault();
 
@@ -247,7 +261,16 @@ function getRoutes() {
         response.forEach(element => {
             $('#getRoutes_TBody').append('<tr><td>' + element.routeId + '</td><td>' + element.routeCodeNum + '</td><td>' + element.routeStartPoint + '</td><td>' + element.routeEndPoint + '</td></tr>');
         });
-    });
+    })
+    .fail(function(jqXHR, status){
+        if (jqXHR.status == 400) {
+          alert("Bad Request. Please review your data.");
+        }else if(jqXHR.status == 401){
+            alert("Unauthorized request. Please review your credentials.");
+        }else{
+          alert("An error occured.");
+        }    
+      });
 }
 
 function createNewRoute(Username, Password, RouteCodeNum, RouteEndPoint, RouteStartPoint, event) {
@@ -311,7 +334,16 @@ function getMetroStations() {
         response.forEach(element => {
             $('#getMetroStations_TBody').append('<tr><td>' + element.stationId + '</td><td>' + element.stationName + '</td><td>' + element.isOnLine + '</td><td>' + element.isAlsoOnLine + '</td></tr>');
         });
-    });
+    })
+    .fail(function(jqXHR, status){
+        if (jqXHR.status == 400) {
+          alert("Bad Request. Please review your data.");
+        }else if(jqXHR.status == 401){
+            alert("Unauthorized request. Please review your credentials.");
+        }else{
+          alert("An error occured.");
+        }    
+      });
 }
 
 
@@ -385,7 +417,16 @@ function getValidationHistory() {
             response.forEach(element => {
                 $('#getValidationHistory_TBody').append('<tr><td>' + element.vactivityId + '</td><td>' + element.validatedOn + '</td><td>' + element.validatedAt + '</td><td>' + element.stationId + '</td><td>' + element.busId + '</td><td>' + element.routeId + '</td><td>' + element.cardId + '</td><td>' + element.bus + '</td><td>' + element.card + '</td><td>' + element.route + '</td><td>' + element.station + '</td></tr>');
             });
-        });
+        })
+        .fail(function(jqXHR, status){
+        if (jqXHR.status == 400) {
+          alert("Bad Request. Please review your data.");
+        }else if(jqXHR.status == 401){
+            alert("Unauthorized request. Please review your credentials.");
+        }else{
+          alert("An error occured.");
+        }    
+      });
     }
 
 }
