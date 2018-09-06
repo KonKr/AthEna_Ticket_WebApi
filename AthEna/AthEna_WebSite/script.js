@@ -415,7 +415,7 @@ function getValidationHistory() {
             //after ajax is complete, deal with the result data...
             $('#getValidationHistory_TBody').empty();
             response.forEach(element => {
-                $('#getValidationHistory_TBody').append('<tr><td>' + element.vactivityId + '</td><td>' + element.validatedOn + '</td><td>' + element.validatedAt + '</td><td>' + element.stationId + '</td><td>' + element.busId + '</td><td>' + element.routeId + '</td><td>' + element.cardId + '</td><td>' + element.bus + '</td><td>' + element.card + '</td><td>' + element.route + '</td><td>' + element.station + '</td></tr>');
+                $('#getValidationHistory_TBody').append('<tr><td>' + element.vactivityId + '</td><td>' + element.validatedOn + '</td><td>' + element.validatedAt + '</td><td>' + element.stationId + '</td><td>' + element.busId + '</td><td>' + element.routeId + '</td><td>' + element.cardId + '</td></tr>');
             });
         })
         .fail(function(jqXHR, status){
